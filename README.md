@@ -33,9 +33,9 @@
 | OLED       | RST        | PG15             |
 
 ## 代码结构（仅包含原创部分）
-- {insert\_element\_0\_YGRodDIyLmNg}/{insert\_element\_1\_YGRodDIyLmhg}：DHT22传感器驱动，包含GPIO模式切换、时序控制、数据解析函数（核心原创）
-- {insert\_element\_3\_YG9sZWQuY2A=}/{insert\_element\_4\_YG9sZWQuaGA=}：OLED屏幕驱动及显示控制（基于标准SPI通信实现，原创逻辑）
-- {insert\_element\_2\_YG1haW4uY2A=}：主程序逻辑，包含初始化、数据读取与显示调度（原创）
+- {DHT22.h}/{DHT22.c}：DHT22传感器驱动，包含GPIO模式切换、时序控制、数据解析函数（核心原创）
+- {oled.h}/{oled.c}：OLED屏幕驱动及显示控制（基于标准SPI通信实现，原创逻辑）
+- {main.c}：主程序逻辑，包含初始化、数据读取与显示调度（原创）
 
 ## 核心逻辑解析
 1. **DHT22通信**：通过`DHT22_SetOutput()`发送起始信号（拉低总线1ms），切换为输入模式`DHT22_SetInput()`等待响应，通过`DHT22_ReadBit()`根据电平持续时间解析0/1数据位，最终组合为温湿度值（`DHT22_ReadData()`函数）。
@@ -48,7 +48,7 @@
 
 ## 版权说明
 - 项目中使用的正点原子开发板配套库文件、启动文件等，版权归正点原子所有，本项目仅用于学习交流。
-- 本仓库中的{insert\_element\_5\_YGRodDIyLmNg}/{insert\_element\_6\_YGRodDIyLmhg}、{insert\_element\_8\_YG9sZWQuY2A=}/{insert\_element\_9\_YG9sZWQuaGA=}、{insert\_element\_7\_YG1haW4uY2A=}等核心代码为原创，可自由用于非商业学习用途。
+- 本仓库中的{DHT22.h}/{DHT22.c}、{oled.h}/{oled.c}、{main.c}等核心代码为原创，可自由用于非商业学习用途。
 
 ## 视频演示
 [点击观看演示视频](你的视频链接)
