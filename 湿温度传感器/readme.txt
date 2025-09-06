@@ -1,0 +1,54 @@
+# DHT22温湿度监测系统
+
+基于STM32的DHT22传感器数据采集与OLED显示项目，通过单总线通信读取温湿度数据，并在OLED屏幕实时展示，同时支持串口打印输出。
+
+## 开发环境与依赖
+- 开发板：正点原子STM32开发板（如STM32F103ZET6）
+- 开发工具：Keil MDK
+- 基础库：使用正点原子提供的STM32标准库、启动文件及底层驱动（如延时、串口等，版权归正点原子所有）
+
+## 项目功能
+- 周期性采集DHT22传感器的温湿度数据（默认2秒一次）
+- OLED屏幕显示当前湿度（%）和温度（C），数据异常时显示"Error"  
+  *注：因OLED默认字符库限制，温度单位暂显示为`C`，可通过添加自定义字符支持`°C`*
+- 串口同步输出数据，便于调试
+- LED指示灯闪烁提示系统运行状态
+
+## 硬件清单
+- 主控：STM32单片机（如STM32F103ZET6）
+- 传感器：DHT22温湿度传感器
+- 显示：0.96寸 12864 OLED屏（SPI通信）
+- 辅助：LED指示灯、杜邦线、电源（3.3V）
+
+## 接线说明
+| 元件        | 引脚       | 单片机引脚（示例） |
+|------------|------------|------------------|
+| DHT22      | VCC        | 3.3V             |
+| DHT22      | GND        | GND              |
+| DHT22      | DATA       | PA0              |
+| OLED       | SCL        | PC0              |
+| OLED       | SDA        | PC1              |
+| OLED       | DC         | PD3              |
+| OLED       | CS         | PD6              |
+| OLED       | RST        | PG15             |
+
+## 代码结构（仅包含原创部分）
+- {insert\_element\_0\_YGRodDIyLmNg}/{insert\_element\_1\_YGRodDIyLmhg}：DHT22传感器驱动，包含GPIO模式切换、时序控制、数据解析函数（核心原创）
+- {insert\_element\_3\_YG9sZWQuY2A=}/{insert\_element\_4\_YG9sZWQuaGA=}：OLED屏幕驱动及显示控制（基于标准SPI通信实现，原创逻辑）
+- {insert\_element\_2\_YG1haW4uY2A=}：主程序逻辑，包含初始化、数据读取与显示调度（原创）
+
+## 核心逻辑解析
+1. **DHT22通信**：通过`DHT22_SetOutput()`发送起始信号（拉低总线1ms），切换为输入模式`DHT22_SetInput()`等待响应，通过`DHT22_ReadBit()`根据电平持续时间解析0/1数据位，最终组合为温湿度值（`DHT22_ReadData()`函数）。
+2. **OLED显示**：通过`oled_show_string()`在指定坐标显示字符，`display_sensor_data()`函数格式化温湿度数据（保留1位小数）并刷新显示区域，温度单位因字符库限制显示为`C`，异常时显示"Error"。
+
+## 运行效果
+- OLED屏幕分两行显示"湿度：xx.x%"和"温度：xx.xC"
+- 串口输出格式：`Humidity: 50.2%, Temperature: 25.6C`
+- 数据读取失败时显示"Error"
+
+## 版权说明
+- 项目中使用的正点原子开发板配套库文件、启动文件等，版权归正点原子所有，本项目仅用于学习交流。
+- 本仓库中的{insert\_element\_5\_YGRodDIyLmNg}/{insert\_element\_6\_YGRodDIyLmhg}、{insert\_element\_8\_YG9sZWQuY2A=}/{insert\_element\_9\_YG9sZWQuaGA=}、{insert\_element\_7\_YG1haW4uY2A=}等核心代码为原创，可自由用于非商业学习用途。
+
+## 视频演示
+[点击观看演示视频](你的视频链接)
