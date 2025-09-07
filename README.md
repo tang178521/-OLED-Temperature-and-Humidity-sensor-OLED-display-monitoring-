@@ -51,4 +51,4 @@
 - 本仓库中的{DHT22.h}/{DHT22.c}、{oled.h}/{oled.c}、{main.c}等核心代码为原创，可自由用于非商业学习用途。
 
 ## 视频演示
-[点击观看演示视频]([你的视频链接](https://www.bilibili.com/video/BV1poY5zjE1b/))
+https://www.bilibili.com/video/BV1poY5zjE1b/
